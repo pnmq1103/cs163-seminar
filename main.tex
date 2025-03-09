@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+
+\usepackage{hcmus-report-template}
+
+% Disable indentation on new paragraphs
+\setlength{\parindent}{0pt}
+
+% Line spacing 1.5
+\renewcommand{\baselinestretch}{1.5}
+
+% Optional: graphic path
+% \graphicspath{PATH_TO_GRAPHIC_FOLDER}
+
+% To use Times font family, uncomment this row
+% \usepackage{mathptmx}
+
+% To use roman section / subsection, uncomment these rows
+% \renewcommand{\thesection}{\Roman{section}}
+% \renewcommand{\thesubsection}{\thesection.\Roman{subsection}}
+
+% Define course name, report name and report title.
+\newcommand{\coursename}{CS163 - Data Structures}
+\newcommand{\reportname}{Sorting Algorithms}
+\newcommand{\reporttitle}{Seminar Report}
+
+% Define student name and teacher name.
+\newcommand{\studentname}{Thuan, Le Minh - 24125105\\ Phu, Nguyen Minh - 24125103 \\ Lac, Quach Thien - 24125092\\ Quan, Pham Nguyen Minh - 24125041}
+\newcommand{\teachername}{MSc. Thanh, Ho Tuan\\ MSc. Loc, Truong Phuoc}
+
+% Header
+\lhead{\reporttitle}
+\rhead{
+VNU-HCM University of Science\\
+\coursename
+}
+
+% Footer
+% \newcommand{\leftfooter}{\LaTeX\ by }
+% \lfoot{\leftfooter}
+
+% ============ DOCUMENT ============
+\begin{document}
+
+\pagenumbering{roman}
+\input{content/title.tex}
+
+\tableofcontents
+\pagebreak
+% \listoftables
+% \pagebreak
+\listoffigures
+\pagebreak
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% \input{content/section}
+% \input{content/hinhanh}
+% \input{content/bangbieu}
+% \input{content/congthuctoan}
+\input{content/heapSort.tex}
+\input{content/countingSort.tex}
+\input{content/pigeonSort.tex}
+% \input{content/thuattoan}
+% \input{content/code}
+% \input{content/ngonngu}
+\input{content/cite}
+
+% References
+\input{ref/ref.tex}
+
+% Appendix
+\appendix
+
+\cleardoublepage
+\input{appendix/appendix.tex}
+
+\end{document}

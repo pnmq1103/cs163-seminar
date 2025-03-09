@@ -1,0 +1,197 @@
+\section{Heap Sort}
+
+\subsection{Introduction}
+\textbf{History:} Heap Sort was first introduced by J.W.J. Williams in 1964. This innovation aimed to exploit the heap data structure to improve sorting performance.
+
+\begin{center}
+    \includegraphics[scale=.25]{img/jwjWilliams.jpg}\\
+    J. W. J. Williams (1930-2012)
+\end{center}
+
+\textbf{Definition:} Heap Sort is a comparison-based, in-place sorting algorithm that leverages the properties of a heap data structure-specifically, a max heap when sorting in ascending order. Its basic premise is:
+\begin{enumerate}
+    \item \textbf{Max Heap Property:} In a max heap, every parent node is greater than or equal to its children. This guarantees that the largest element is always at the root.
+    \item \textbf{In-Place Sorting:} Heap Sort rearranges the data within the input array, meaning it does not require significant additional memory.
+    \item \textbf{Time Complexity:} It consistently operates in $O(n \log n)$ time in the worst case, making it reliable and predictable.
+\end{enumerate}
+
+\subsection{Algorithm}
+
+\subsubsection{Main steps and Pseudocode}
+\begin{itemize}
+    \item Build the Max Heap
+    \item Sort the Array (Extract Elements from Heap)
+\end{itemize}
+
+\begin{algorithm}
+    \caption{Heapify}
+    \begin{algorithmic}[1]
+        \Function{Heapify}{$A$, $i$, $n$}
+        \State $largest \gets i$
+        \State $left \gets 2i + 1$
+        \State $right \gets 2i + 2$
+        \If{$left < n$ \textbf{and} $A[left] > A[largest]$}
+        \State $largest \gets left$
+        \EndIf
+        \If{$right < n$ \textbf{and} $A[right] > A[largest]$}
+        \State $largest \gets right$
+        \EndIf
+        \If{$largest \neq i$}
+        \State \Call{Swap}{$A[i]$, $A[largest]$}
+        \State \Call{Heapify}{$A$, $largest$, $n$}
+        \EndIf
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{BuildMaxHeap}
+    \begin{algorithmic}[1]
+        \Function{BuildMaxHeap}{$A$}
+        \State $n \gets |A|$
+        \For{$i \gets \lfloor n/2 \rfloor - 1$ \textbf{downto} 0}
+        \State \Call{Heapify}{$A$, $i$, $n$}
+        \EndFor
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+    \caption{HeapSort}
+    \begin{algorithmic}[1]
+        \Function{HeapSort}{$A$}
+        \State \Call{BuildMaxHeap}{$A$}
+        \For{$i \gets |A| - 1$ \textbf{downto} 1}
+        \State \Call{Swap}{$A[0]$, $A[i]$}
+        \State \Call{Heapify}{$A$, 0, $i$}
+        \EndFor
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Detailed Implementation}
+
+\textbf{Step 1: Build the Max Heap}
+\begin{itemize}
+    \item \textbf{Determine the Starting Point:}
+    \begin{itemize}
+        \item The array is treated as a complete binary tree.
+        \item The last non-leaf node resides at index $\lfloor n/2 \rfloor - 1$, where $n$ is the total number of elements.
+    \end{itemize}
+    \item \textbf{Call heapify() on Each Non-Leaf Node:}
+    \begin{itemize}
+        \item Starting from the last non-leaf node and moving upward to the root, apply the heapify() procedure to enforce the max heap property.
+        \item The heapify() procedure ensures that for a node at index $i$, the value at $i$ is greater than or equal to its children.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Step 2: Sort the Array (Extract Elements from Heap)}
+\begin{itemize}
+    \item \textbf{Swap the Root with the Last Element:}
+    \begin{itemize}
+        \item The root of the max heap (index 0) holds the maximum value. Swap it with the last element in the heap (at index $n-1$).
+    \end{itemize}
+    \item \textbf{Reduce Heap Size:}
+    \begin{itemize}
+        \item After the swap, consider the last element as sorted. Reduce the effective heap size by one so that it is excluded from further heap operations.
+    \end{itemize}
+    \item \textbf{Re-heapify the Root:}
+    \begin{itemize}
+        \item Call the heapify() procedure on the root (index 0) to restore the max heap property over the reduced heap.
+    \end{itemize}
+    \item \textbf{Repeat Extraction:}
+    \begin{itemize}
+        \item Continue this process—swapping the root with the last unsorted element and re-heapifying—until the entire array is sorted.
+    \end{itemize}
+\end{itemize}
+
+\lstinputlisting[language=C++, caption=Heap Sort in C++, style=mystyle]{code/heapSort.cpp}
+
+\subsection{Evaluation}
+
+\textbf{Building the Heap}
+\begin{itemize}
+    \item \textbf{Operation:} Constructing a Heap (Max-Heap) from the input array.
+    \item \textbf{Complexity:} $O(n)$
+    \item \textbf{Explanation:} While a single “heapify” operation takes $O(\log n)$, the total time to build the heap is $O(n)$ due to optimization when handling elements at lower levels of the heap.
+\end{itemize}
+
+\textbf{Extracting Element from the Heap}
+\begin{itemize}
+    \item \textbf{Operation:} Extract the root element (Maximum) and rearrange the heap.
+    \item \textbf{Complexity:} $O(n \log n)$
+    \item \textbf{Explanation:} There are $n$ extractions, and each extraction is followed by a "heapify" operation that takes $O(\log n)$.
+\end{itemize}
+
+\textbf{In-Place Sorting}
+\begin{itemize}
+    \item \textbf{Operation:} Swap the extracted root element with the last unsorted element.
+    \item \textbf{Complexity:} $O(n \log n)$
+    \item \textbf{Explanation:} Swapping is combined with extraction and re-heapification, contributing to the overall complexity.
+\end{itemize}
+
+\textbf{Space Complexity}
+\begin{itemize}
+    \item \textbf{Space Used:} $O(1)$
+    \item \textbf{Explanation:} Heap Sort is an in-place sorting algorithm, so it does not require additional space beyond the input array.
+\end{itemize}
+
+\subsection{Application}
+
+Heap sort is a strong algorithm. It has several practical applications due to its efficiency and predictable performance:
+\begin{enumerate}
+    \item \textbf{Sorting Large Datasets:} Heap sort is particularly useful for sorting large datasets where memory usage is a concern. \textit{Example:} Sorting a large database of employee records by salary.
+    \item \textbf{Priority Queue Implementation:} Heap sort is the foundation for implementing priority queues. Priority queues are used in scheduling algorithms, such as in operating systems or task management systems. \textit{Example:} Scheduling tasks in a CPU based on their priority levels.
+    \item \textbf{External Sorting:} Heap sort is used in external sorting algorithms where data is too large to fit into memory. It helps in merging sorted chunks of data efficiently. \textit{Example:} Sorting large files stored on disk.
+    \item \textbf{Real-Time Systems:} Heap sort is used in real-time systems where predictable performance is critical. \textit{Example:} Sorting sensor data in real-time for autonomous vehicles.
+    \item \textbf{Selection Algorithms:} Heap sort is used in selection algorithms to find the $k$th smallest or largest element in a list. \textit{Example:} Finding the median of a dataset efficiently.
+    \item \textbf{Game Development:} Heap sort is used in game development for managing and sorting game objects based on priority or distance. \textit{Example:} Rendering objects in a game based on their distance from the camera.
+    \item \textbf{Event-Driven Simulations:} Heap sort is used in simulations where events need to be processed in a specific order. \textit{Example:} Simulating the behavior of a queue in a bank or a call center.
+    \item \textbf{Operating Systems:} Heap sort is used in operating systems for memory management and process scheduling. \textit{Example:} Managing memory allocation for processes in a multi-tasking environment.
+\end{enumerate}
+
+\subsection{Problems}
+
+\textbf{1. Kth Largest Element in an Array}
+\begin{itemize}
+    \item \textbf{Description:} Given an unsorted array, determine the $k$th largest element.
+    \item \textbf{Detailed Instructions:}
+    \begin{enumerate}
+        \item Create a min-heap (priority queue) and insert the first $k$ elements of the array into it.
+        \item For every remaining element in the array, compare it with the heap’s root. If it’s larger, remove the root and insert the new element, maintaining the heap property.
+        \item Once all elements are processed, the root of the heap is the $k$th largest element. Use this technique to optimize your time complexity to $O(n \log k)$.
+    \end{enumerate}
+\end{itemize}
+
+\textbf{2. Find Median from Data Stream}
+\begin{itemize}
+    \item \textbf{Description:} Continuously find the median of a stream of numbers.
+    \item \textbf{Detailed Instructions:}
+    \begin{enumerate}
+        \item Use two heaps: a max-heap for the lower half of the numbers and a min-heap for the upper half.
+        \item When a new number arrives, decide which heap to insert it into, then rebalance the heaps if their sizes differ by more than one.
+        \item For median retrieval, if heaps are equal in size, average the roots; otherwise, return the root of the larger heap. This dual-heap method ensures that the median is found efficiently after each insertion.
+    \end{enumerate}
+\end{itemize}
+
+\textbf{3. Merge k Sorted Lists}
+\begin{itemize}
+    \item \textbf{Description:} Merge multiple sorted linked lists into one sorted linked list.
+    \item \textbf{Detailed Instructions:}
+    \begin{enumerate}
+        \item Initialize a min-heap and insert the head (first node) of each of the $k$ lists into it.
+        \item Repeatedly extract the smallest node from the heap and append it to the merged list. If the extracted node has a next node, insert that node into the heap.
+        \item Continue until the heap is empty. This process ensures that at each step, you’re adding the smallest current node, maintaining overall sorted order.
+    \end{enumerate}
+\end{itemize}
+
+\textbf{4. Sliding Window Median}
+\begin{itemize}
+    \item \textbf{Description:} Given an array and a window size $k$, compute the median of every sliding window.
+    \item \textbf{Detailed Instructions:}
+    \begin{enumerate}
+        \item Use two heaps (max-heap and min-heap) to represent the current window’s lower and upper halves.
+        \item As the window slides, add the new element and remove the element that’s moving out of the window. Rebalance the heaps to maintain the required size properties.
+        \item After every slide, compute the median based on the roots of the two heaps. This ensures an efficient update and retrieval of the median as the window moves.
+    \end{enumerate}
+\end{itemize}
