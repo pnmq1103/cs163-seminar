@@ -1,15 +1,17 @@
 \section{Counting Sort}
 
 \subsection{Introduction}
-\subsubsection{History}
+\textbf{History:}
 Counting Sort was developed by Harold H. Seward in the early 1950s, often cited around 1954. It is recognized for its ability to sort integers in linear time under the right conditions.
 
-\begin{center}
-    \includegraphics[scale=1]{img/haroldHSeward.jpg} \\
-    \textbf{Harold H. Seward (1930-2012)}
-\end{center}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{img/haroldHSeward.jpg}
+\caption{Harold H. Seward (1930-2012)}
+\label{fig:harold_h_seward}
+\end{figure}
 
-\subsubsection{Definition}
+\textbf{Definition:}
 Counting Sort is a non-comparison-based sorting algorithm that sorts elements by counting the number of occurrences of each unique value in the input array. It then uses these counts to determine the positions of each element in the final, sorted array.
 
 \begin{itemize}
@@ -17,22 +19,48 @@ Counting Sort is a non-comparison-based sorting algorithm that sorts elements by
     \item Time complexity: \(O(n + k)\), where \(n\) is the number of elements and \(k\) is the range of the input values.
 \end{itemize}
 
-\subsubsection{Main Data Structure}
+\subsection{Algorithm and Implementation}
 \begin{enumerate}
-    \item Determine the range of the data. (Sometimes min is assumed to be 0 to simplify the process.)
-    \item Initialize the Count Array: Create a count array of size \((\text{max} - \text{min} + 1)\) and initialize all elements to 0.
-    \item Count the Occurrences: Iterate over the input array and for each element, increment the corresponding index in the count array. For an element \(x\), increment \(\text{count}[x - \text{min}]\).
-    \item Transform the Count Array into a Cumulative Count Array: Modify the count array such that each element at index \(i\) contains the sum of previous counts. This cumulative count tells you the final position of each element in the output array.
-    \item Build the Output Array:
+    \item \textbf{Determine the Range of the Data:} Sometimes min is assumed to be 0 to simplify the process.
+    \item \textbf{Initialize the Count Array:} Create a count array of size \((\text{max} - \text{min} + 1)\) and initialize all elements to 0.
+    \item \textbf{Count the Occurrences:} Iterate over the input array and for each element, increment the corresponding index in the count array. For an element \(x\), increment \(\text{count}[x - \text{min}]\).
+    \item \textbf{Transform the Count Array into a Cumulative Count Array:} Modify the count array such that each element at index \(i\) contains the sum of previous counts. This cumulative count tells you the final position of each element in the output array.
+    \item \textbf{Build the Output Array:}
     \begin{itemize}
         \item Traverse the input array once more, usually in reverse order to ensure stability (maintaining the original order of equal elements).
         \item Place each element \(x\) into its correct position in the output array by using the cumulative count, then decrement the count value for \(x\).
     \end{itemize}
 \end{enumerate}
 
-\lstinputlisting[language=C++, caption=Counting Sort Algorithm, style=mystyle]{code/countingSort.cpp}
+\begin{algorithm}
+\caption{Counting Sort}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Array $A$ of size $n$
+\State \textbf{Output:} Sorted array $B$
+\State \textbf{Determine the Range of the Data}
+\State $min \gets \min(A)$
+\State $max \gets \max(A)$
+\State \textbf{Initialize the Count Array}
+\State $count \gets \text{array of size } (max - min + 1) \text{ initialized to 0}$
+\State \textbf{Count the Occurrences}
+\For{each element $x$ in $A$}
+    \State $count[x - min] \gets count[x - min] + 1$
+\EndFor
+\State \textbf{Transform the Count Array into a Cumulative Count Array}
+\For{$i \gets 1$ to $length(count) - 1$}
+    \State $count[i] \gets count[i] + count[i - 1]$
+\EndFor
+\State \textbf{Build the Output Array}
+\State $B \gets \text{array of size } n$
+\For{each element $x$ in $A$ \textbf{in reverse order}}
+    \State $B[count[x - min] - 1] \gets x$
+    \State $count[x - min] \gets count[x - min] - 1$
+\EndFor
+\State \textbf{Return} $B$
+\end{algorithmic}
+\end{algorithm}
 
-\subsubsection{Evaluation}
+\subsection{Evaluation}
 \subsubsection{Building the Count Array}
 \textbf{Operation:} Create and populate the count array with the frequency of each element in the input array. \\
 \textbf{Complexity:} \(O(n)\) \\
@@ -52,7 +80,7 @@ Counting Sort is a non-comparison-based sorting algorithm that sorts elements by
 \textbf{Space Used:} \(O(\text{max} - \text{min} + 1)\) \\
 \textbf{Explanation:} Additional space is needed to store the count array. Its size depends on the range of values in the input array (\(\text{max} - \text{min} + 1\)).
 
-\subsubsection{Application}
+\subsection{Application}
 Counting sort is a non-comparison-based sorting algorithm that works well for sorting integers or objects with small, discrete key ranges. It counts the occurrences of each element and uses this information to place elements in their correct sorted position.
 \begin{enumerate}
     \item \textbf{Sorting Small Range Integers:} Counting sort is highly efficient for sorting integers or keys within a small, known range. Example: Sorting exam scores (e.g., 0 to 100) or ages of individuals.
@@ -66,39 +94,51 @@ Counting sort is a non-comparison-based sorting algorithm that works well for so
     \item \textbf{String Sorting:} Counting sort is used in string sorting algorithms, especially when sorting by a specific character position. Example: Sorting strings lexicographically or by a specific attribute.
 \end{enumerate}
 
-\subsubsection{Problems}
+\subsection{Problems}
 \subsubsection{Counting Sort 1}
-\textbf{Description:} Count the frequency of each integer in an array. \\
-\textbf{Detailed Instructions:}
-\begin{enumerate}
-    \item Identify the maximum value in the array to determine the size of your count array.
-    \item Traverse the input array, incrementing the corresponding index in the count array for each element encountered.
-    \item Output the count array, ensuring that the frequency for every number (including those with zero occurrences) is reported.
-\end{enumerate}
+\begin{itemize}
+    \item \href{https://www.hackerrank.com/challenges/one-week-preparation-kit-countingsort1/problem}{Hackrrank}
+    \item \textbf{Description:} Count the frequency of each integer in an array.
+    \item \textbf{Detailed Instructions:}
+    \begin{enumerate}
+        \item Identify the maximum value in the array to determine the size of your count array.
+        \item Traverse the input array, incrementing the corresponding index in the count array for each element encountered.
+        \item Output the count array, ensuring that the frequency for every number (including those with zero occurrences) is reported.
+    \end{enumerate}
+\end{itemize}
 
 \subsubsection{The Full Counting Sort}
-\textbf{Description:} Sort pairs of numbers and strings based on numeric keys while preserving the original order for equal keys. \\
-\textbf{Detailed Instructions:}
-\begin{enumerate}
-    \item Create a count array based on the numeric keys and count the occurrences.
-    \item Convert the count array into a cumulative frequency array to determine the final positions of the keys.
-    \item Place each (number, string) pair into a new array at the position determined by the cumulative counts, ensuring that elements with the same key retain their original order (stability).
-\end{enumerate}
+\begin{itemize}
+    \item \href{https://www.hackerrank.com/challenges/countingsort4/problem}{Hackrrank}
+    \item \textbf{Description:} Sort pairs of numbers and strings based on numeric keys while preserving the original order for equal keys.
+    \item \textbf{Detailed Instructions:}
+    \begin{enumerate}
+        \item Create a count array based on the numeric keys and count the occurrences.
+        \item Convert the count array into a cumulative frequency array to determine the final positions of the keys.
+        \item Place each (number, string) pair into a new array at the position determined by the cumulative counts, ensuring that elements with the same key retain their original order (stability).
+    \end{enumerate}
+\end{itemize}
 
 \subsubsection{Counting Sort 2}
-\textbf{Description:} Efficiently sort an array of integers using counting sort. \\
-\textbf{Detailed Instructions:}
-\begin{enumerate}
-    \item Find the maximum integer in the input array to allocate a count array of size \(\text{max}+1\).
-    \item Iterate through the array to populate the count array with frequencies of each integer.
-    \item Reconstruct the sorted array by iterating through the count array and appending each integer based on its count, ensuring linear time performance when the range isn’t excessively large.
-\end{enumerate}
+\begin{itemize}
+    \item \href{https://www.hackerrank.com/challenges/countingsort2/problem}{Hackrrank}
+    \item \textbf{Description:} Efficiently sort an array of integers using counting sort.
+    \item \textbf{Detailed Instructions:}
+    \begin{enumerate}
+        \item Find the maximum integer in the input array to allocate a count array of size \(\text{max}+1\).
+        \item Iterate through the array to populate the count array with frequencies of each integer.
+        \item Reconstruct the sorted array by iterating through the count array and appending each integer based on its count, ensuring linear time performance when the range isn’t excessively large.
+    \end{enumerate}
+\end{itemize}
 
 \subsubsection{Find All Numbers Disappeared in an Array}
-\textbf{Description:} Identify which numbers in the range [1, n] are missing from the input array. \\
-\textbf{Detailed Instructions:}
-\begin{enumerate}
-    \item Create a boolean (or count) array of size \(n+1\), initialized to mark all numbers as missing.
-    \item Traverse the input array and mark each number that appears in the corresponding index of your boolean array.
-    \item Iterate through the range 1 to \(n\) and collect those numbers that remain unmarked, as these are the missing numbers. This counting technique ensures that every potential number is checked exactly once.
-\end{enumerate}
+\begin{itemize}
+    \item \href{https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/}{LeetCode}
+    \item \textbf{Description:} Identify which numbers in the range [1, n] are missing from the input array.
+    \item \textbf{Detailed Instructions:}
+    \begin{enumerate}
+        \item Create a boolean (or count) array of size \(n+1\), initialized to mark all numbers as missing.
+        \item Traverse the input array and mark each number that appears in the corresponding index of your boolean array.
+        \item Iterate through the range 1 to \(n\) and collect those numbers that remain unmarked, as these are the missing numbers. This counting technique ensures that every potential number is checked exactly once.
+    \end{enumerate}
+\end{itemize}

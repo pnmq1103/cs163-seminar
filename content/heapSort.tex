@@ -3,10 +3,12 @@
 \subsection{Introduction}
 \textbf{History:} Heap Sort was first introduced by J.W.J. Williams in 1964. This innovation aimed to exploit the heap data structure to improve sorting performance.
 
-\begin{center}
-    \includegraphics[scale=.25]{img/jwjWilliams.jpg}\\
-    J. W. J. Williams (1930-2012)
-\end{center}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.3]{img/jwjWilliams.jpg}
+\caption{J. W. J. Williams (1930-2012)}
+\label{fig:jwj_williams}
+\end{figure}
 
 \textbf{Definition:} Heap Sort is a comparison-based, in-place sorting algorithm that leverages the properties of a heap data structure-specifically, a max heap when sorting in ascending order. Its basic premise is:
 \begin{enumerate}
@@ -15,12 +17,20 @@
     \item \textbf{Time Complexity:} It consistently operates in $O(n \log n)$ time in the worst case, making it reliable and predictable.
 \end{enumerate}
 
-\subsection{Algorithm}
+\subsection{Algorithm and Implementation}
 
-\subsubsection{Main steps and Pseudocode}
+\textbf{Step 1: Build the Max Heap}
 \begin{itemize}
-    \item Build the Max Heap
-    \item Sort the Array (Extract Elements from Heap)
+    \item \textbf{Determine the Starting Point:}
+    \begin{itemize}
+        \item The array is treated as a complete binary tree.
+        \item The last non-leaf node resides at index $\lfloor n/2 \rfloor - 1$, where $n$ is the total number of elements.
+    \end{itemize}
+    \item \textbf{Call heapify() on Each Non-Leaf Node:}
+    \begin{itemize}
+        \item Starting from the last non-leaf node and moving upward to the root, apply the heapify() procedure to enforce the max heap property.
+        \item The heapify() procedure ensures that for a node at index $i$, the value at $i$ is greater than or equal to its children.
+    \end{itemize}
 \end{itemize}
 
 \begin{algorithm}
@@ -56,35 +66,6 @@
     \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
-    \caption{HeapSort}
-    \begin{algorithmic}[1]
-        \Function{HeapSort}{$A$}
-        \State \Call{BuildMaxHeap}{$A$}
-        \For{$i \gets |A| - 1$ \textbf{downto} 1}
-        \State \Call{Swap}{$A[0]$, $A[i]$}
-        \State \Call{Heapify}{$A$, 0, $i$}
-        \EndFor
-        \EndFunction
-    \end{algorithmic}
-\end{algorithm}
-
-\subsubsection{Detailed Implementation}
-
-\textbf{Step 1: Build the Max Heap}
-\begin{itemize}
-    \item \textbf{Determine the Starting Point:}
-    \begin{itemize}
-        \item The array is treated as a complete binary tree.
-        \item The last non-leaf node resides at index $\lfloor n/2 \rfloor - 1$, where $n$ is the total number of elements.
-    \end{itemize}
-    \item \textbf{Call heapify() on Each Non-Leaf Node:}
-    \begin{itemize}
-        \item Starting from the last non-leaf node and moving upward to the root, apply the heapify() procedure to enforce the max heap property.
-        \item The heapify() procedure ensures that for a node at index $i$, the value at $i$ is greater than or equal to its children.
-    \end{itemize}
-\end{itemize}
-
 \textbf{Step 2: Sort the Array (Extract Elements from Heap)}
 \begin{itemize}
     \item \textbf{Swap the Root with the Last Element:}
@@ -101,36 +82,51 @@
     \end{itemize}
     \item \textbf{Repeat Extraction:}
     \begin{itemize}
-        \item Continue this process—swapping the root with the last unsorted element and re-heapifying—until the entire array is sorted.
+        \item Continue this process, swapping the root with the last unsorted element and re-heapifying until the entire array is sorted.
     \end{itemize}
 \end{itemize}
+
+\begin{algorithm}
+    \caption{HeapSort}
+    \begin{algorithmic}[1]
+        \Function{HeapSort}{$A$}
+        \State \Call{BuildMaxHeap}{$A$}
+        \For{$i \gets |A| - 1$ \textbf{downto} 1}
+        \State \Call{Swap}{$A[0]$, $A[i]$}
+        \State \Call{Heapify}{$A$, 0, $i$}
+        \EndFor
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+Below is the Implementation in C++
 
 \lstinputlisting[language=C++, caption=Heap Sort in C++, style=mystyle]{code/heapSort.cpp}
 
 \subsection{Evaluation}
 
-\textbf{Building the Heap}
+\subsubsection{Building the Heap}
 \begin{itemize}
     \item \textbf{Operation:} Constructing a Heap (Max-Heap) from the input array.
     \item \textbf{Complexity:} $O(n)$
     \item \textbf{Explanation:} While a single “heapify” operation takes $O(\log n)$, the total time to build the heap is $O(n)$ due to optimization when handling elements at lower levels of the heap.
 \end{itemize}
 
-\textbf{Extracting Element from the Heap}
+\subsubsection{Extracting Element from the Heap}
 \begin{itemize}
     \item \textbf{Operation:} Extract the root element (Maximum) and rearrange the heap.
     \item \textbf{Complexity:} $O(n \log n)$
     \item \textbf{Explanation:} There are $n$ extractions, and each extraction is followed by a "heapify" operation that takes $O(\log n)$.
 \end{itemize}
 
-\textbf{In-Place Sorting}
+\subsubsection{In-Place Sorting}
 \begin{itemize}
     \item \textbf{Operation:} Swap the extracted root element with the last unsorted element.
     \item \textbf{Complexity:} $O(n \log n)$
     \item \textbf{Explanation:} Swapping is combined with extraction and re-heapification, contributing to the overall complexity.
 \end{itemize}
 
-\textbf{Space Complexity}
+\subsubsection{Space Complexity}
 \begin{itemize}
     \item \textbf{Space Used:} $O(1)$
     \item \textbf{Explanation:} Heap Sort is an in-place sorting algorithm, so it does not require additional space beyond the input array.
@@ -152,8 +148,9 @@ Heap sort is a strong algorithm. It has several practical applications due to it
 
 \subsection{Problems}
 
-\textbf{1. Kth Largest Element in an Array}
+\subsubsection{Kth Largest Element in an Array}
 \begin{itemize}
+    \item \href{https://leetcode.com/problems/kth-largest-element-in-an-array/}{LeetCode}
     \item \textbf{Description:} Given an unsorted array, determine the $k$th largest element.
     \item \textbf{Detailed Instructions:}
     \begin{enumerate}
@@ -163,8 +160,9 @@ Heap sort is a strong algorithm. It has several practical applications due to it
     \end{enumerate}
 \end{itemize}
 
-\textbf{2. Find Median from Data Stream}
+\subsubsection{Find Median from Data Stream}
 \begin{itemize}
+    \item \href{https://leetcode.com/problems/find-median-from-data-stream/}{LeetCode}
     \item \textbf{Description:} Continuously find the median of a stream of numbers.
     \item \textbf{Detailed Instructions:}
     \begin{enumerate}
@@ -174,8 +172,9 @@ Heap sort is a strong algorithm. It has several practical applications due to it
     \end{enumerate}
 \end{itemize}
 
-\textbf{3. Merge k Sorted Lists}
+\subsubsection{Merge k Sorted Lists}
 \begin{itemize}
+    \item \href{https://leetcode.com/problems/merge-k-sorted-lists/}{LeetCode}
     \item \textbf{Description:} Merge multiple sorted linked lists into one sorted linked list.
     \item \textbf{Detailed Instructions:}
     \begin{enumerate}
@@ -185,8 +184,9 @@ Heap sort is a strong algorithm. It has several practical applications due to it
     \end{enumerate}
 \end{itemize}
 
-\textbf{4. Sliding Window Median}
+\subsubsection{Sliding Window Median}
 \begin{itemize}
+    \item \href{https://leetcode.com/problems/sliding-window-median/}{LeetCode}
     \item \textbf{Description:} Given an array and a window size $k$, compute the median of every sliding window.
     \item \textbf{Detailed Instructions:}
     \begin{enumerate}
