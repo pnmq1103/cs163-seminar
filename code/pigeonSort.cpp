@@ -1,6 +1,4 @@
-/* Sorts the array using pigeonhole algorithm */
 void pigeonholeSort(int arr[], int n){
-    // Find minimum and maximum values in arr[]
     int min = arr[0], max = arr[0];
     for (int i = 1; i < n; i++){
         if (arr[i] < min)
@@ -8,16 +6,13 @@ void pigeonholeSort(int arr[], int n){
         if (arr[i] > max)
             max = arr[i];
     }
-    int range = max - min + 1; // Find range
-    // Create an array of vectors. Size of array range. Each vector represents a hole that is going to contain matching elements.
+    int range = max - min + 1;
     vector<vector<int>> holes(range);
 
-    // Traverse through input array and put every element in its respective hole
     for (int i = 0; i < n; i++)
         holes[arr[i] - min].push_back(arr[i]);
 
-    // Traverse through all holes one by one. For every hole, take its elements and put in array.
-    int index = 0;  // index in sorted array
+    int index = 0; 
     for (int i = 0; i < range; i++)
     {
         vector<int>::iterator it;

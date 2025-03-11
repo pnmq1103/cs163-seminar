@@ -20,16 +20,43 @@ Peter Gustav Lejeune Dirichlet, who formally stated the idea in 1834.
 
 \subsection{Algorithm and Implementation}
 
-Pigeonhole sort is similar to counting sort, but differs in that it “moves items twice: once to the bucket array and again to the final destination.
+Pigeonhole sort is similar to counting sort, but differs in that it “moves items twice: once to the bucket array and again to the final destination.”
 
 \begin{enumerate}
-    \item \textbf{Determine the range:} Find minimum and maximum values in array. Let the minimum and maximum values be ‘min’ and ‘max’ respectively. Also find range as ‘max-min+1’.
-    \item \textbf{Initialize an array:} Set up an array of initially empty “pigeonholes” the same size as of the range.
-    \item \textbf{Distribution step:} Visit each element of the array and then put each element in its pigeonhole. An element $arr[i]$ is put in hole at index $arr[i] - \text{min}$.
+    \item \textbf{Determine the range:} Find the minimum and maximum values in the array. Let the minimum and maximum values be ‘min’ and ‘max’ respectively. Also, find the range as ‘max-min+1’.
+    \item \textbf{Initialize an array:} Set up an array of initially empty “pigeonholes” the same size as the range.
+    \item \textbf{Distribution step:} Visit each element of the array and then put each element in its pigeonhole. An element $arr[i]$ is put in the hole at index $arr[i] - \text{min}$.
     \item \textbf{Output reconstruction phase:} Start the loop all over the pigeonhole array in order and put the elements from non-empty holes back into the original array.
 \end{enumerate}
 
-\lstinputlisting[language=C++, caption=Pigeonhole Sort Algorithm, style=mystyle]{code/pigeonSort.cpp}
+\begin{algorithm}
+    \caption{Pigeonhole Sort}
+    \begin{algorithmic}[1]
+        \State \textbf{Input:} Array $A$ of size $n$
+        \State \textbf{Output:} Sorted array $A$
+        \Function{PigeonholeSort}{$A$, $n$}
+        \State $min \gets \min(A)$
+        \State $max \gets \max(A)$
+        \State $range \gets max - min + 1$
+        \State $P \gets \text{array of size } range \text{ initialized to 0}$
+        \For{each element $x$ in $A$}
+            \State $P[x - min] \gets P[x - min] + 1$
+        \EndFor
+        \State $index \gets 0$
+        \For{$i \gets 0$ to $range - 1$}
+            \While{$P[i] > 0$}
+                \State $A[index] \gets i + min$
+                \State $index \gets index + 1$
+                \State $P[i] \gets P[i] - 1$
+            \EndWhile
+        \EndFor
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+Below is the implementation in C++:
+
+\lstinputlisting[language=C++, caption=Pigeonhole Sort in C++, style=mystyle]{code/pigeonSort.cpp}
 
 \subsection{Evaluation}
 
@@ -70,82 +97,79 @@ Pigeonhole sort is a non-comparison-based sorting algorithm that works well for 
 \subsection{Problems}
 
 \subsubsection{Pigeonhole Sort 1}
-\begin{itemize}
-    \item \textbf{Description:} Sort an array of integers using pigeonhole sort.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Identify the minimum and maximum values in the array to determine the range.
-        \item Initialize a pigeonhole array of size \(\text{max} - \text{min} + 1\).
-        \item Traverse the input array, placing each element in the corresponding pigeonhole.
-        \item Reconstruct the sorted array by iterating through the pigeonhole array and placing elements back into the original array.
-    \end{enumerate}
-\end{itemize}
+\textbf{Description:} Sort an array of integers using pigeonhole sort.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Identify the minimum and maximum values in the array to determine the range.
+    \item Initialize a pigeonhole array of size \(\text{max} - \text{min} + 1\).
+    \item Traverse the input array, placing each element in the corresponding pigeonhole.
+    \item Reconstruct the sorted array by iterating through the pigeonhole array and placing elements back into the original array.
+\end{enumerate}
 
 \subsubsection{The Full Pigeonhole Sort}
-\begin{itemize}
-    \item \textbf{Description:} Sort pairs of numbers and strings based on numeric keys while preserving the original order for equal keys.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Create a pigeonhole array based on the numeric keys and place the elements in the corresponding pigeonholes.
-        \item Reconstruct the sorted array by iterating through the pigeonhole array and placing elements back into the original array, ensuring stability.
-    \end{enumerate}
-\end{itemize}
+\textbf{Description:} Sort pairs of numbers and strings based on numeric keys while preserving the original order for equal keys.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Create a pigeonhole array based on the numeric keys and place the elements in the corresponding pigeonholes.
+    \item Reconstruct the sorted array by iterating through the pigeonhole array and placing elements back into the original array, ensuring stability.
+\end{enumerate}
 
 \subsubsection{Find All Numbers Disappeared in an Array}
-\begin{itemize}
-    \item \textbf{Description:} Identify which numbers in the range [1, n] are missing from the input array.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Create a boolean (or pigeonhole) array of size \(n+1\), initialized to mark all numbers as missing.
-        \item Traverse the input array and mark each number that appears in the corresponding index of your boolean array.
-        \item Iterate through the range 1 to \(n\) and collect those numbers that remain unmarked, as these are the missing numbers. This counting technique ensures that every potential number is checked exactly once.
-    \end{enumerate}
-\end{itemize}
+\textbf{Description:} Identify which numbers in the range [1, n] are missing from the input array.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Create a boolean (or pigeonhole) array of size \(n+1\), initialized to mark all numbers as missing.
+    \item Traverse the input array and mark each number that appears in the corresponding index of your boolean array.
+    \item Iterate through the range 1 to \(n\) and collect those numbers that remain unmarked, as these are the missing numbers. This counting technique ensures that every potential number is checked exactly once.
+\end{enumerate}
 
 \subsubsection{Sort an Array of 0s, 1s and 2s}
-\begin{itemize}
-    \item \href{https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/}{geeksforgeeks.org}
-    \item \textbf{Description:} Sort an array containing only 0s, 1s, and 2s (a variant often used for the Dutch National Flag problem).
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Iterate over the array to count the number of 0s, 1s, and 2s.
-        \item Overwrite the original array by placing the counted number of 0s first, followed by 1s and then 2s.
-        \item Validate the resulting array to ensure that all elements are in the expected sorted order.
-    \end{enumerate}
-\end{itemize}
+\href{https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/}{geeksforgeeks.org}
+
+\textbf{Description:} Sort an array containing only 0s, 1s, and 2s (a variant often used for the Dutch National Flag problem).
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Iterate over the array to count the number of 0s, 1s, and 2s.
+    \item Overwrite the original array by placing the counted number of 0s first, followed by 1s and then 2s.
+    \item Validate the resulting array to ensure that all elements are in the expected sorted order.
+\end{enumerate}
 
 \subsubsection{Sort Characters By Frequency}
-\begin{itemize}
-    \item \href{https://leetcode.com/problems/sort-characters-by-frequency/}{LeetCode}
-    \item \textbf{Description:} Rearrange the characters of a string so that characters with higher frequencies come first.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Traverse the string to build a frequency map for each character.
-        \item Use a bucket sort (pigeonhole sort style) where each bucket corresponds to a frequency, placing characters into the appropriate bucket.
-        \item Reconstruct the string by iterating through the buckets from highest to lowest frequency, appending each character as many times as its frequency.
-    \end{enumerate}
-\end{itemize}
+\href{https://leetcode.com/problems/sort-characters-by-frequency/}{LeetCode}
+
+\textbf{Description:} Rearrange the characters of a string so that characters with higher frequencies come first.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Traverse the string to build a frequency map for each character.
+    \item Use a bucket sort (pigeonhole sort style) where each bucket corresponds to a frequency, placing characters into the appropriate bucket.
+    \item Reconstruct the string by iterating through the buckets from highest to lowest frequency, appending each character as many times as its frequency.
+\end{enumerate}
 
 \subsubsection{Sort Array by Increasing Frequency}
-\begin{itemize}
-    \item \href{https://leetcode.com/problems/sort-array-by-increasing-frequency/}{LeetCode}
-    \item \textbf{Description:} Sort the elements of an array by their frequency. In case of ties, the smaller number should come first.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Count the frequency of each element using a hash map or count array.
-        \item Create buckets where each bucket holds the elements corresponding to a specific frequency.
-        \item Iterate through the buckets in ascending order of frequency; for tied frequencies, sort the numbers in ascending order, then rebuild the array from these sorted buckets.
-    \end{enumerate}
-\end{itemize}
+\href{https://leetcode.com/problems/sort-array-by-increasing-frequency/}{LeetCode}
+
+\textbf{Description:} Sort the elements of an array by their frequency. In case of ties, the smaller number should come first.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Count the frequency of each element using a hash map or count array.
+    \item Create buckets where each bucket holds the elements corresponding to a specific frequency.
+    \item Iterate through the buckets in ascending order of frequency; for tied frequencies, sort the numbers in ascending order, then rebuild the array from these sorted buckets.
+\end{enumerate}
 
 \subsubsection{Sort Integers by The Number of 1 Bits}
-\begin{itemize}
-    \item \href{https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/}{LeetCode}
-    \item \textbf{Description:} Sort integers by the number of 1s in their binary representation; if two numbers have the same number of 1s, sort them by their numeric value.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item For each integer, compute the number of 1 bits (this can be done using bit manipulation or a built-in function).
-        \item Use these counts as keys for sorting. If two numbers have the same bit count, compare their numerical values.
-        \item Reconstruct the sorted array based on these comparisons, ensuring that the algorithm is efficient by possibly caching bit counts for repeated values.
-    \end{enumerate}
-\end{itemize}
+\href{https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/}{LeetCode}
+
+\textbf{Description:} Sort integers by the number of 1s in their binary representation; if two numbers have the same number of 1s, sort them by their numeric value.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item For each integer, compute the number of 1 bits (this can be done using bit manipulation or a built-in function).
+    \item Use these counts as keys for sorting. If two numbers have the same bit count, compare their numerical values.
+    \item Reconstruct the sorted array based on these comparisons, ensuring that the algorithm is efficient by possibly caching bit counts for repeated values.
+\end{enumerate}

@@ -35,30 +35,32 @@ Counting Sort is a non-comparison-based sorting algorithm that sorts elements by
 \begin{algorithm}
 \caption{Counting Sort}
 \begin{algorithmic}[1]
-\State \textbf{Input:} Array $A$ of size $n$
-\State \textbf{Output:} Sorted array $B$
-\State \textbf{Determine the Range of the Data}
-\State $min \gets \min(A)$
-\State $max \gets \max(A)$
-\State \textbf{Initialize the Count Array}
-\State $count \gets \text{array of size } (max - min + 1) \text{ initialized to 0}$
-\State \textbf{Count the Occurrences}
-\For{each element $x$ in $A$}
-    \State $count[x - min] \gets count[x - min] + 1$
-\EndFor
-\State \textbf{Transform the Count Array into a Cumulative Count Array}
-\For{$i \gets 1$ to $length(count) - 1$}
-    \State $count[i] \gets count[i] + count[i - 1]$
-\EndFor
-\State \textbf{Build the Output Array}
-\State $B \gets \text{array of size } n$
-\For{each element $x$ in $A$ \textbf{in reverse order}}
-    \State $B[count[x - min] - 1] \gets x$
-    \State $count[x - min] \gets count[x - min] - 1$
-\EndFor
-\State \textbf{Return} $B$
+    \State \textbf{Input:} Array $A$ of size $n$
+    \State \textbf{Output:} Sorted array $B$
+    \Function{CountingSort}{$A$, $n$}
+        \State $min \gets \min(A)$
+        \State $max \gets \max(A)$
+        \State $count \gets \text{array of size } (max - min + 1) \text{ initialized to 0}$
+        \For{each element $x$ in $A$}
+            \State $count[x - min] \gets count[x - min] + 1$
+        \EndFor
+        \For{$i \gets 1$ to $length(count) - 1$}
+            \State $count[i] \gets count[i] + count[i - 1]$
+        \EndFor
+        \State $B \gets \text{array of size } n$
+        \For{each element $x$ in $A$ \textbf{in reverse order}}
+            \State $B[count[x - min] - 1] \gets x$
+            \State $count[x - min] \gets count[x - min] - 1$
+        \EndFor
+        \State \textbf{Return} $B$
+    \EndFunction
 \end{algorithmic}
 \end{algorithm}
+
+\begin{minipage}{\linewidth}
+    Below is the implementation in C++:
+    \lstinputlisting[language=C++, caption=Counting Sort in C++, style=mystyle,]{code/countingSort.cpp}
+\end{minipage}
 
 \subsection{Evaluation}
 \subsubsection{Building the Count Array}
@@ -83,62 +85,62 @@ Counting Sort is a non-comparison-based sorting algorithm that sorts elements by
 \subsection{Application}
 Counting sort is a non-comparison-based sorting algorithm that works well for sorting integers or objects with small, discrete key ranges. It counts the occurrences of each element and uses this information to place elements in their correct sorted position.
 \begin{enumerate}
-    \item \textbf{Sorting Small Range Integers:} Counting sort is highly efficient for sorting integers or keys within a small, known range. Example: Sorting exam scores (e.g., 0 to 100) or ages of individuals.
-    \item \textbf{Histogram Generation:} Counting sort can be used to generate histograms or frequency distributions of data. Example: Analyzing the frequency of words in a text or the distribution of pixel intensities in an image.
-    \item \textbf{Data Compression:} Counting sort is used in data compression algorithms to analyze and organize data frequencies. Example: Building frequency tables for Huffman coding or other compression techniques.
-    \item \textbf{Counting Occurrences:} Counting sort can be used to count the occurrences of elements in a dataset. Example: Counting the number of students who scored a particular grade in an exam.
-    \item \textbf{Sorting Characters or Small Alphabets:} Counting sort is efficient for sorting characters or small alphabets. Example: Sorting letters in a word or DNA sequences (A, T, C, G).
-    \item \textbf{Real-Time Systems:} Counting sort is used in real-time systems where sorting needs to be done quickly and efficiently. Example: Sorting sensor data in real-time for IoT devices.
-    \item \textbf{Database Indexing:} Counting sort can be used in database systems to sort and index records with small key ranges. Example: Sorting records by a small set of categories or flags.
-    \item \textbf{Statistical Analysis:} Counting sort is used in statistical analysis to sort and analyze data distributions. Example: Sorting survey responses or experimental data for further analysis.
-    \item \textbf{String Sorting:} Counting sort is used in string sorting algorithms, especially when sorting by a specific character position. Example: Sorting strings lexicographically or by a specific attribute.
+    \item \textbf{Sorting Small Range Integers:} Counting sort is highly efficient for sorting integers or keys within a small, known range. \textit{Example:} Sorting exam scores (e.g., 0 to 100) or ages of individuals.
+    \item \textbf{Histogram Generation:} Counting sort can be used to generate histograms or frequency distributions of data. \textit{Example:} Analyzing the frequency of words in a text or the distribution of pixel intensities in an image.
+    \item \textbf{Data Compression:} Counting sort is used in data compression algorithms to analyze and organize data frequencies. \textit{Example:} Building frequency tables for Huffman coding or other compression techniques.
+    \item \textbf{Counting Occurrences:} Counting sort can be used to count the occurrences of elements in a dataset. \textit{Example:} Counting the number of students who scored a particular grade in an exam.
+    \item \textbf{Sorting Characters or Small Alphabets:} Counting sort is efficient for sorting characters or small alphabets. \textit{Example:} Sorting letters in a word or DNA sequences (A, T, C, G).
+    \item \textbf{Real-Time Systems:} Counting sort is used in real-time systems where sorting needs to be done quickly and efficiently. \textit{Example:} Sorting sensor data in real-time for IoT devices.
+    \item \textbf{Database Indexing:} Counting sort can be used in database systems to sort and index records with small key ranges. \textit{Example:} Sorting records by a small set of categories or flags.
+    \item \textbf{Statistical Analysis:} Counting sort is used in statistical analysis to sort and analyze data distributions. \textit{Example:} Sorting survey responses or experimental data for further analysis.
+    \item \textbf{String Sorting:} Counting sort is used in string sorting algorithms, especially when sorting by a specific character position. \textit{Example:} Sorting strings lexicographically or by a specific attribute.
 \end{enumerate}
 
 \subsection{Problems}
 \subsubsection{Counting Sort 1}
-\begin{itemize}
-    \item \href{https://www.hackerrank.com/challenges/one-week-preparation-kit-countingsort1/problem}{Hackrrank}
-    \item \textbf{Description:} Count the frequency of each integer in an array.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Identify the maximum value in the array to determine the size of your count array.
-        \item Traverse the input array, incrementing the corresponding index in the count array for each element encountered.
-        \item Output the count array, ensuring that the frequency for every number (including those with zero occurrences) is reported.
-    \end{enumerate}
-\end{itemize}
+\href{https://www.hackerrank.com/challenges/one-week-preparation-kit-countingsort1/problem}{HackerRank}
+
+\textbf{Description:} Count the frequency of each integer in an array.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Identify the maximum value in the array to determine the size of your count array.
+    \item Traverse the input array, incrementing the corresponding index in the count array for each element encountered.
+    \item Output the count array, ensuring that the frequency for every number (including those with zero occurrences) is reported.
+\end{enumerate}
 
 \subsubsection{The Full Counting Sort}
-\begin{itemize}
-    \item \href{https://www.hackerrank.com/challenges/countingsort4/problem}{Hackrrank}
-    \item \textbf{Description:} Sort pairs of numbers and strings based on numeric keys while preserving the original order for equal keys.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Create a count array based on the numeric keys and count the occurrences.
-        \item Convert the count array into a cumulative frequency array to determine the final positions of the keys.
-        \item Place each (number, string) pair into a new array at the position determined by the cumulative counts, ensuring that elements with the same key retain their original order (stability).
-    \end{enumerate}
-\end{itemize}
+\href{https://www.hackerrank.com/challenges/countingsort4/problem}{HackerRank}
+
+\textbf{Description:} Sort pairs of numbers and strings based on numeric keys while preserving the original order for equal keys.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Create a count array based on the numeric keys and count the occurrences.
+    \item Convert the count array into a cumulative frequency array to determine the final positions of the keys.
+    \item Place each (number, string) pair into a new array at the position determined by the cumulative counts, ensuring that elements with the same key retain their original order (stability).
+\end{enumerate}
 
 \subsubsection{Counting Sort 2}
-\begin{itemize}
-    \item \href{https://www.hackerrank.com/challenges/countingsort2/problem}{Hackrrank}
-    \item \textbf{Description:} Efficiently sort an array of integers using counting sort.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Find the maximum integer in the input array to allocate a count array of size \(\text{max}+1\).
-        \item Iterate through the array to populate the count array with frequencies of each integer.
-        \item Reconstruct the sorted array by iterating through the count array and appending each integer based on its count, ensuring linear time performance when the range isn’t excessively large.
-    \end{enumerate}
-\end{itemize}
+\href{https://www.hackerrank.com/challenges/countingsort2/problem}{HackerRank}
+
+\textbf{Description:} Efficiently sort an array of integers using counting sort.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Find the maximum integer in the input array to allocate a count array of size \(\text{max}+1\).
+    \item Iterate through the array to populate the count array with frequencies of each integer.
+    \item Reconstruct the sorted array by iterating through the count array and appending each integer based on its count, ensuring linear time performance when the range isn’t excessively large.
+\end{enumerate}
 
 \subsubsection{Find All Numbers Disappeared in an Array}
-\begin{itemize}
-    \item \href{https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/}{LeetCode}
-    \item \textbf{Description:} Identify which numbers in the range [1, n] are missing from the input array.
-    \item \textbf{Detailed Instructions:}
-    \begin{enumerate}
-        \item Create a boolean (or count) array of size \(n+1\), initialized to mark all numbers as missing.
-        \item Traverse the input array and mark each number that appears in the corresponding index of your boolean array.
-        \item Iterate through the range 1 to \(n\) and collect those numbers that remain unmarked, as these are the missing numbers. This counting technique ensures that every potential number is checked exactly once.
-    \end{enumerate}
-\end{itemize}
+\href{https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/}{LeetCode}
+
+\textbf{Description:} Identify which numbers in the range [1, n] are missing from the input array.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Create a boolean (or count) array of size \(n+1\), initialized to mark all numbers as missing.
+    \item Traverse the input array and mark each number that appears in the corresponding index of your boolean array.
+    \item Iterate through the range 1 to \(n\) and collect those numbers that remain unmarked, as these are the missing numbers. This counting technique ensures that every potential number is checked exactly once.
+\end{enumerate}
