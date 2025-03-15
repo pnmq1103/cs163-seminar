@@ -56,20 +56,6 @@
     \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
-    \caption{BuildMaxHeap}
-    \begin{algorithmic}[1]
-        \State \textbf{Input:} Array $A$
-        \State \textbf{Output:} Array $A$ transformed into a max heap
-        \Function{BuildMaxHeap}{$A$}
-        \State $n \gets |A|$
-        \For{$i \gets \lfloor n/2 \rfloor - 1$ \textbf{downto} 0}
-        \State \Call{Heapify}{$A$, $i$, $n$}
-        \EndFor
-        \EndFunction
-    \end{algorithmic}
-\end{algorithm}
-
 \textbf{Step 2: Sort the Array (Extract Elements from Heap)}
 \begin{itemize}
     \item \textbf{Swap the Root with the Last Element:}
@@ -96,8 +82,11 @@
         \State \textbf{Input:} Array $A$
         \State \textbf{Output:} Sorted array $A$
         \Function{HeapSort}{$A$}
-        \State \Call{BuildMaxHeap}{$A$}
-        \For{$i \gets |A| - 1$ \textbf{downto} 1}
+        \State $n \gets |A|$
+        \For{$i \gets \lfloor n/2 \rfloor - 1$ \textbf{downto} 0}
+        \State \Call{Heapify}{$A$, $i$, $n$}
+        \EndFor
+        \For{$i \gets n - 1$ \textbf{downto} 1}
         \State \Call{Swap}{$A[0]$, $A[i]$}
         \State \Call{Heapify}{$A$, 0, $i$}
         \EndFor
@@ -105,11 +94,9 @@
     \end{algorithmic}
 \end{algorithm}
 
-\begin{minipage}{\linewidth}
-    Below is the implementation in C++:
+Below is the implementation in C++:
 
-    \lstinputlisting[language=C++, caption=Heap Sort in C++, style=mystyle]{code/heapSort.cpp}    
-\end{minipage}
+\lstinputlisting[language=C++, caption=Heap Sort in C++, style=mystyle]{code/heapSort.cpp} 
 
 \subsection{Evaluation}
 

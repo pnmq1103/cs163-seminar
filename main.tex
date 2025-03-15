@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 
 \usepackage{hcmus-report-template}
+\usepackage{hyperref} % Add this line to include the hyperref package
 
 % Disable indentation on new paragraphs
 \setlength{\parindent}{0pt}
@@ -28,8 +29,8 @@ VNU-HCM University of Science\\
 }
 
 % Footer
-% \newcommand{\leftfooter}{\LaTeX\ by }
-% \lfoot{\leftfooter}
+\newcommand{\leftfooter}{\hyperlink{toc}{TOC}} % Define a new command for the left footer with a link
+\lfoot{\leftfooter}
 
 % ============ DOCUMENT ============
 \begin{document}
@@ -37,6 +38,7 @@ VNU-HCM University of Science\\
 \pagenumbering{roman}
 \input{content/title.tex}
 
+\hypertarget{toc}{}
 \tableofcontents
 \pagebreak
 \listoftables
@@ -48,16 +50,16 @@ VNU-HCM University of Science\\
 \setcounter{page}{1}
 
 \input{content/heapSort.tex}
+\clearpage
 \input{content/countingSort.tex}
+\clearpage
 \input{content/pigeonSort.tex}
+\clearpage
 \input{content/oddEvenSort.tex}
+\clearpage
 \input{content/comparison.tex}
 \clearpage
 \input{content/quizzes.tex}
-% \input{content/cite}
-
-% References
-% \input{ref/ref.tex}
 
 % Appendix
 \appendix

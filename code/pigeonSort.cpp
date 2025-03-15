@@ -1,22 +1,22 @@
-void pigeonholeSort(int arr[], int n){
-    int min = arr[0], max = arr[0];
-    for (int i = 1; i < n; i++){
-        if (arr[i] < min)
-            min = arr[i];
-        if (arr[i] > max)
-            max = arr[i];
+void pigeonholeSort(int arr[], int n) {
+    int MIN = arr[0], MAX = arr[0];
+
+    for (int i = 1; i < n; i++) {
+        MIN = std::min(MIN, arr[i]);
+        MAX = std::max(MAX, arr[i]);
     }
-    int range = max - min + 1;
-    vector<vector<int>> holes(range);
+
+    int range = MAX - MIN + 1;
+    std::vector<int> holes(range, 0);
 
     for (int i = 0; i < n; i++)
-        holes[arr[i] - min].push_back(arr[i]);
+        ++holes[arr[i] - MIN];
 
     int index = 0; 
-    for (int i = 0; i < range; i++)
-    {
-        vector<int>::iterator it;
-        for (it = holes[i].begin(); it != holes[i].end(); ++it)
-            arr[index++] = *it;
+    for (int i = 0; i < range; i++) {
+        while (holes[i]--) {
+            arr[index] = i + MIN;
+            ++index;
+        }
     }
 }

@@ -1,14 +1,13 @@
 \section{Quizzes}
-
 \begin{enumerate}
     \item \textbf{What is Heapify in Heap Sort?}
     \begin{enumerate}
-        \item Building a complete binary tree
-        \item Ensuring the max heap or min heap property
-        \item Sorting the array by comparing each element
-        \item Creating an AVL tree
-    \end{enumerate}
-    \textbf{Answer:} B. Ensuring the max heap or min heap property \\
+            \item Building a complete binary tree
+            \item Ensuring the max heap or min heap property
+            \item Sorting the array by comparing each element
+            \item Creating an AVL tree
+        \end{enumerate}
+    \textbf{Answer:} \textbf{(b)} Ensuring the max heap or min heap property \\
     \textbf{Explanation:} \\
     - Heapify is the process of ensuring that a binary tree satisfies the max heap property (parent is greater than or equal to its children) or the min heap property (parent is less than or equal to its children). \\
     - In Heap Sort, Heapify is used to build and maintain the heap structure during the sorting process. \\
@@ -21,11 +20,11 @@
         \item Sorting data in external memory
         \item Sorting data with a small range of values
     \end{enumerate}
-    \textbf{Answer:} D. Sorting data with a small range of values \\
+    \textbf{Answer:} \textbf{(d)} Sorting data with a small range of values \\
     \textbf{Explanation:} \\
     - Heap Sort is a comparison-based sorting algorithm with a time complexity of O(n log n) in all cases. \\
-    - It is suitable for sorting large datasets (A), implementing priority queues (B), and sorting data in external memory (C). \\
-    - However, Heap Sort is not ideal for sorting data with a small range of values (D) because algorithms like Counting Sort or Pigeonhole Sort are more efficient in such cases.
+    - It is suitable for sorting large datasets (a), implementing priority queues (b), and sorting data in external memory (c). \\
+    - However, Heap Sort is not ideal for sorting data with a small range of values (d) because algorithms like Counting Sort or Pigeonhole Sort are more efficient in such cases.
     
     \item \textbf{When does Counting Sort work most efficiently?}
     \begin{enumerate}
@@ -34,7 +33,7 @@
         \item When the data consists of real numbers
         \item When the data consists of strings
     \end{enumerate}
-    \textbf{Answer:} B. When the range of values (k) is smaller than or approximately equal to the number of elements (n) \\
+    \textbf{Answer:} \textbf{(b)} When the range of values (k) is smaller than or approximately equal to the number of elements (n) \\
     \textbf{Explanation:} \\
     - Counting Sort is a non-comparison-based sorting algorithm with a time complexity of O(n + k), where k is the range of values in the data. \\
     - It works most efficiently when k is smaller than or approximately equal to n (the number of elements). \\
@@ -47,10 +46,10 @@
         \item Sorting large datasets with a large range of values
         \item Sorting characters in a string
     \end{enumerate}
-    \textbf{Answer:} C. Sorting large datasets with a large range of values \\
+    \textbf{Answer:} \textbf{(c)} Sorting large datasets with a large range of values \\
     \textbf{Explanation:} \\
-    - Counting Sort is suitable for sorting integers within a small range (A), generating histograms (B), and sorting characters in a string (D). \\
-    - However, it is not suitable for sorting large datasets with a large range of values (C) because its space complexity is O(k), and if k is too large, it will consume excessive memory.
+    - Counting Sort is suitable for sorting integers within a small range (a), generating histograms (b), and sorting characters in a string (d). \\
+    - However, it is not suitable for sorting large datasets with a large range of values (c) because its space complexity is O(k), and if k is too large, it will consume excessive memory.
     
     \item \textbf{When does Pigeonhole Sort work most efficiently?}
     \begin{enumerate}
@@ -59,7 +58,7 @@
         \item When the data consists of real numbers
         \item When the data consists of strings
     \end{enumerate}
-    \textbf{Answer:} B. When the number of elements (n) is approximately equal to the range of values (k) \\
+    \textbf{Answer:} \textbf{(b)} When the number of elements (n) is approximately equal to the range of values (k) \\
     \textbf{Explanation:} \\
     - Pigeonhole Sort is a non-comparison-based sorting algorithm with a time complexity of O(n + k), where k is the range of values in the data. \\
     - It works most efficiently when the number of elements (n) is approximately equal to the range of values (k). \\
@@ -72,7 +71,7 @@
         \item Pigeonhole Sort does not require a range of values
         \item Counting Sort does not require a range of values
     \end{enumerate}
-    \textbf{Answer:} A. Pigeonhole Sort moves elements twice \\
+    \textbf{Answer:} \textbf{(a)} Pigeonhole Sort moves elements twice \\
     \textbf{Explanation:} \\
     - Both Pigeonhole Sort and Counting Sort are non-comparison-based sorting algorithms with a time complexity of O(n + k). \\
     - However, Pigeonhole Sort differs in that it moves elements twice: \\
@@ -85,11 +84,11 @@
         \item Heap Sort
         \item Counting Sort
         \item Pigeonhole Sort
-        \item Both B and C
+        \item Both (b) and (c)
     \end{enumerate}
-    \textbf{Answer:} D. Both B and C \\
+    \textbf{Answer:} \textbf{(d)} Both (b) and (c) \\
     \textbf{Explanation:} \\
     - Both Counting Sort and Pigeonhole Sort are non-comparison-based sorting algorithms with a time complexity of O(n + k), where k is the range of values in the data. \\
     - They work most efficiently when k is smaller than or approximately equal to n (the number of elements). \\
-    - Heap Sort (A) is a comparison-based algorithm with a time complexity of O(n log n), making it less suitable for small ranges compared to Counting Sort and Pigeonhole Sort.
+    - Heap Sort (a) is a comparison-based algorithm with a time complexity of O(n log n), making it less suitable for small ranges compared to Counting Sort and Pigeonhole Sort.
 \end{enumerate}

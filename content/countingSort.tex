@@ -48,7 +48,8 @@ Counting Sort is a non-comparison-based sorting algorithm that sorts elements by
             \State $count[i] \gets count[i] + count[i - 1]$
         \EndFor
         \State $B \gets \text{array of size } n$
-        \For{each element $x$ in $A$ \textbf{in reverse order}}
+        \For{$i \gets 0$ to $n - 1$}
+            \State $x \gets A[i]$
             \State $B[count[x - min] - 1] \gets x$
             \State $count[x - min] \gets count[x - min] - 1$
         \EndFor
@@ -59,7 +60,7 @@ Counting Sort is a non-comparison-based sorting algorithm that sorts elements by
 
 \begin{minipage}{\linewidth}
     Below is the implementation in C++:
-    \lstinputlisting[language=C++, caption=Counting Sort in C++, style=mystyle,]{code/countingSort.cpp}
+        \lstinputlisting[language=C++, caption=Counting Sort in C++, style=mystyle,]{code/countingSort.cpp}
 \end{minipage}
 
 \subsection{Evaluation}

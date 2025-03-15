@@ -1,17 +1,52 @@
-\section{ODD-EVEN TRANSPOSITIONS SORT}
+\section{Odd-Even Transposition Sort}
 
 \subsection{Introduction}
 \textbf{History:} Developed in 1972 by N. Habermann for parallel processor arrays, OETS gained prominence through Kenneth Batcher's work on sorting networks. Its design enables efficient execution on architectures with local interconnections, predating modern GPU-based sorting techniques.
 
-Kenneth Batcher (1935-2019)
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.5]{img/kennethEBatcher.jpg}
+\caption{Kenneth Batcher (1935-2019)}
+\label{fig:batcher}
+\end{figure}
 
 \textbf{Definition:} Odd-Even Transposition Sort (OETS) is a parallel sorting algorithm derived from Bubble Sort, using alternating comparison phases to enable efficient concurrent execution. It operates in $O(n^2)$ time sequentially but achieves $O(n)$ time with $n$ processors in parallel implementations. The algorithm's simplicity and parallelizability make it valuable for multi-core systems and educational demonstrations.
 
-\subsection{Main data structure}
+\subsection{Algorithm and Implementation}
 \begin{itemize}
     \item \textbf{Array:} The algorithm operates on a 1D array, comparing and swapping adjacent elements in-place.
     \item \textbf{Parallel Processors:} Each processor holds one element and communicates with immediate neighbors during odd/even phases.
 \end{itemize}
+
+\begin{algorithm}
+    \caption{Odd-Even Transposition Sort}
+    \begin{algorithmic}[1]
+        \State \textbf{Input:} Array $A$ of size $n$
+        \State \textbf{Output:} Sorted array $A$
+        \Function{OddEvenSort}{$A$, $n$}
+            \State $isSorted \gets \text{False}$
+            \While{$\neg isSorted$}
+                \State $isSorted \gets \text{True}$
+                \For{$i \gets 1$ to $n-1$ \textbf{step} 2}
+                    \If{$A[i] > A[i+1]$}
+                        \State \Call{swap}{$A[i], A[i+1]$}
+                        \State $isSorted \gets \text{False}$
+                    \EndIf
+                \EndFor
+                \For{$i \gets 0$ to $n-1$ \textbf{step} 2}
+                    \If{$A[i] > A[i+1]$}
+                        \State \Call{swap}{$A[i], A[i+1]$}
+                        \State $isSorted \gets \text{False}$
+                    \EndIf
+                \EndFor
+            \EndWhile
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+Below is the implementation in C++:
+
+\lstinputlisting[language=C++, caption=Odd-Even Transposition Sort in C++]{code/oddEvenSort.cpp}
 
 \subsection{Evaluation}
 \subsubsection{Building the Even-Odd Transposition Sort Array}
