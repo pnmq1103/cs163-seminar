@@ -83,7 +83,7 @@
         \State \textbf{Output:} Sorted array $A$
         \Function{HeapSort}{$A$}
         \State $n \gets |A|$
-        \For{$i \gets \lfloor n/2 \rfloor - 1$ \textbf{downto} 0}
+        \For{$i \gets \lfloor n/2 \rfloor - 1$ \textbf{downto} 0} \Comment{Build Max Heap}
         \State \Call{Heapify}{$A$, $i$, $n$}
         \EndFor
         \For{$i \gets n - 1$ \textbf{downto} 1}

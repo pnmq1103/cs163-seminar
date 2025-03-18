@@ -46,7 +46,10 @@
 
 Below is the implementation in C++:
 
-\lstinputlisting[language=C++, caption=Odd-Even Transposition Sort in C++]{code/oddEvenSort.cpp}
+\begin{minipage}{\textwidth}
+\centering
+    \lstinputlisting[language=C++, caption=Odd-Even Transposition Sort in C++]{code/oddEvenSort.cpp}
+\end{minipage}
 
 \subsection{Evaluation}
 \subsubsection{Building the Even-Odd Transposition Sort Array}
@@ -88,25 +91,6 @@ While the even-odd transposition sort is not commonly used in practical applicat
 \end{itemize}
 
 \subsection{Problems}
-
-\subsubsection{Sort Colors}
-\href{https://leetcode.com/problems/sort-colors/description/}{LeetCode}
-
-\textbf{Description:} Given an array with $n$ objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
-
-\textbf{Detailed Instructions:}
-\begin{enumerate}
-    \item Initialize Pointers: Set three pointers: low, mid, and high. Initialize low and mid to the start of the array and high to the end.
-    \item Iterate Through the Array:
-    \begin{itemize}
-        \item While mid is less than or equal to high:
-        \item If array[mid] is 0, swap it with array[low], increment both low and mid.
-        \item If array[mid] is 1, just increment mid.
-        \item If array[mid] is 2, swap it with array[high] and decrement high.
-    \end{itemize}
-    \item Complete the Sorting: Continue until mid exceeds high.
-    \item Return the Sorted Array.
-\end{enumerate}
 
 \subsubsection{Sorting: Bubble Sort}
 \href{https://www.hackerrank.com/challenges/30-sorting/problem}{HackerRank}

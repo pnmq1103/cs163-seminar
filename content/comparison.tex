@@ -11,7 +11,7 @@
         Heap Sort          & Not stable         & $O(n \log n)$            & $O(1)$                    & Stable performance, memory efficient & Not stable, complex implementation \\ \hline
         Counting Sort      & Stable             & $O(n + k)$               & $O(n + k)$                & Linear time, simple, stable           & Memory intensive, not flexible for wide value ranges \\ \hline
         Pigeonhole Sort    & Potentially stable & $O(n + k)$               & $O(n + k)$                & Efficient for small value ranges, simple, fast & Memory intensive, reduced efficiency for wide value ranges, less common in practice \\ \hline
-        Odd-Even Transition Sort & Not stable & $O(n^2)$ & $O(1)$ & Simple, easy to implement, efficient for small arrays & Poor performance on large arrays, not stable \\ \hline
+        Odd-Even Transition Sort & Stable & $O(n^2)$ & $O(1)$ & Simple, easy to implement, efficient for small arrays & Poor performance on single-core processors or large arrays \\ \hline
     \end{tabularx}
     \caption{Comparison of Sorting Algorithms}
     \label{tab:sorting_algorithms}

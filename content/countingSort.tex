@@ -98,6 +98,26 @@ Counting sort is a non-comparison-based sorting algorithm that works well for so
 \end{enumerate}
 
 \subsection{Problems}
+
+\subsubsection{Sort Colors}
+\href{https://leetcode.com/problems/sort-colors/description/}{LeetCode}
+
+\textbf{Description:} Given an array with $n$ objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+
+\textbf{Detailed Instructions:}
+\begin{enumerate}
+    \item Initialize Pointers: Set three pointers: low, mid, and high. Initialize low and mid to the start of the array and high to the end.
+    \item Iterate Through the Array:
+    \begin{itemize}
+        \item While mid is less than or equal to high:
+        \item If array[mid] is 0, swap it with array[low], increment both low and mid.
+        \item If array[mid] is 1, just increment mid.
+        \item If array[mid] is 2, swap it with array[high] and decrement high.
+    \end{itemize}
+    \item Complete the Sorting: Continue until mid exceeds high.
+    \item Return the Sorted Array.
+\end{enumerate}
+
 \subsubsection{Counting Sort 1}
 \href{https://www.hackerrank.com/challenges/one-week-preparation-kit-countingsort1/problem}{HackerRank}
 
