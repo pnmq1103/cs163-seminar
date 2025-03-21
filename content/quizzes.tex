@@ -91,4 +91,49 @@
     - Both Counting Sort and Pigeonhole Sort are non-comparison-based sorting algorithms with a time complexity of O(n + k), where k is the range of values in the data. \\
     - They work most efficiently when k is smaller than or approximately equal to n (the number of elements). \\
     - Heap Sort (a) is a comparison-based algorithm with a time complexity of O(n log n), making it less suitable for small ranges compared to Counting Sort and Pigeonhole Sort.
+    \item \textbf{What is the average time complexity of Odd-Even Transition Sort?}
+    \begin{enumerate}
+        \item O(n)
+        \item O(n log n)
+        \item O(n²)
+        \item O(log n)
+    \end{enumerate}
+    \textbf{Answer:} \textbf{(c)} O(n²) \\
+    \textbf{Explanation:} \\
+    - The average time complexity of Odd-Even Transition Sort is O(n²), similar to other simple sorting algorithms like Bubble Sort.
+
+    \item \textbf{How does the comparison and swapping process work in Odd-Even Transition Sort?}
+    \begin{enumerate}
+        \item Compare and swap elements at even positions with each other, then elements at odd positions with each other.
+        \item Compare and swap elements at even positions with elements at odd positions.
+        \item Compare and swap adjacent elements.
+        \item Compare and swap elements at a fixed distance apart.
+    \end{enumerate}
+    \textbf{Answer:} \textbf{(b)} Compare and swap elements at even positions with elements at odd positions \\
+    \textbf{Explanation:} \\
+    - In Odd-Even Transition Sort:
+        - During the even phase, pairs like (0, 1), (2, 3), (4, 5), etc., are compared and swapped if necessary.
+        - During the odd phase, pairs like (1, 2), (3, 4), (5, 6), etc., are compared and swapped if necessary.
+
+    \item \textbf{Can Odd-Even Transition Sort be parallelized?}
+    \begin{enumerate}
+        \item Yes, because comparisons and swaps in even and odd phases can be performed simultaneously.
+        \item No, because comparisons and swaps must be performed sequentially.
+        \item Only on specialized hardware.
+        \item Only when the array is nearly sorted.
+    \end{enumerate}
+    \textbf{Answer:} \textbf{(a)} Yes, because comparisons and swaps in even and odd phases can be performed simultaneously \\
+    \textbf{Explanation:} \\
+    - Odd-Even Transition Sort can be parallelized because the comparisons and swaps in the even and odd phases can be executed concurrently on different processors.
+
+    \item \textbf{Which category of sorting algorithms does Odd-Even Transition Sort belong to?}
+    \begin{enumerate}
+        \item Comparison-based sorting.
+        \item Non-comparison-based sorting.
+        \item Stable sorting.
+        \item Unstable sorting.
+    \end{enumerate}
+    \textbf{Answer:} \textbf{(a)} Comparison-based sorting \\
+    \textbf{Explanation:} \\
+    - Odd-Even Transition Sort is a comparison-based sorting algorithm because it relies on comparing elements to determine their order.
 \end{enumerate}
