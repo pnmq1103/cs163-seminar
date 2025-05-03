@@ -1,4 +1,18 @@
-﻿def counting_sort(arr):
+﻿# Program to sort an integer array using 4 algorithms: Counting Sort, Heap Sort, Odd-Even Sort, Pigeonhole Sort.
+# Instructions:
+# 1. Enter the number of elements (n) for the array (must be a non-negative integer).
+# 2. Enter n integers one by one to create the array.
+# 3. Choose a sorting algorithm from the menu by entering a number from 1 to 5:
+#    - 1: Sort using Counting Sort
+#    - 2: Sort using Heap Sort
+#    - 3: Sort using Odd-Even Sort
+#    - 4: Sort using Pigeonhole Sort
+#    - 5: Exit the program
+# 4. After selection, the program will display the sorted array.
+# 5. You can choose another algorithm or exit.
+# Note: Entering incorrect formats (e.g., letters instead of numbers) will cause an error and display a message.
+
+def counting_sort(arr):
     n = len(arr)
     if n == 0:
         return []
@@ -61,6 +75,8 @@ def odd_even_sort(arr):
     return arr
 
 def pigeonhole_sort(arr):
+    if not arr:
+        return arr
     MIN = min(arr)
     MAX = max(arr)
     range_size = MAX - MIN + 1
@@ -79,65 +95,52 @@ def pigeonhole_sort(arr):
     return arr
 
 def display_menu():
-    print("\n=== MENU SẮP XẾP ===")
+    print("\n=== SORTING MENU ===")
     print("1. Counting Sort")
     print("2. Heap Sort")
     print("3. Odd-Even Sort")
     print("4. Pigeonhole Sort")
-    print("5. Thoát")
+    print("5. Exit")
 
 def main():
-    # Nhập mảng
+    # Input array
     try:
-        n = int(input("Nhập số lượng phần tử: "))
+        n = int(input("Enter the number of elements: "))
         if n < 0:
-            print("Số lượng phần tử không thể âm!")
+            print("Number of elements cannot be negative!")
             return
         arr = []
         for i in range(n):
-            arr.append(int(input(f"Nhập phần tử thứ {i+1}: ")))
-        print("Mảng ban đầu:", arr)
+            arr.append(int(input(f"Enter element {i+1}: ")))
+        print("Original array:", arr)
 
         while True:
             display_menu()
-            choice = input("Chọn thuật toán (1-5): ")
+            choice = input("Choose an algorithm (1-5): ")
 
-            # Tạo bản sao mảng để không thay đổi mảng gốc
+            # Create a copy of the array to preserve the original
             arr_copy = arr.copy()
             sorted_arr = []
 
             if choice == '1':
                 sorted_arr = counting_sort(arr_copy)
-                print("Mảng sau khi sắp xếp bằng Counting Sort:", sorted_arr)
+                print("Array sorted by Counting Sort:", sorted_arr)
             elif choice == '2':
                 sorted_arr = heap_sort(arr_copy)
-                print("Mảng sau khi sắp xếp bằng Heap Sort:", sorted_arr)
+                print("Array sorted by Heap Sort:", sorted_arr)
             elif choice == '3':
                 sorted_arr = odd_even_sort(arr_copy)
-                print("Mảng sau khi sắp xếp bằng Odd-Even Sort:", sorted_arr)
+                print("Array sorted by Odd-Even Sort:", sorted_arr)
             elif choice == '4':
                 sorted_arr = pigeonhole_sort(arr_copy)
-                print("Mảng sau khi sắp xếp bằng Pigeonhole Sort:", sorted_arr)
+                print("Array sorted by Pigeonhole Sort:", sorted_arr)
             elif choice == '5':
-                print("Chương trình đã kết thúc!")
+                print("Program terminated!")
                 break
             else:
-                print("Lựa chọn không hợp lệ! Vui lòng chọn lại.")
+                print("Invalid choice! Please choose again.")
     except ValueError:
-        print("Lỗi: Vui lòng chỉ nhập số nguyên!")
+        print("Error: Please enter integers only!")
 
 if __name__ == "__main__":
     main()
-# Chương trình sắp xếp mảng số nguyên bằng 4 thuật toán: Counting Sort, Heap Sort, Odd-Even Sort, Pigeonhole Sort.
-# Hướng dẫn sử dụng:
-# 1. Nhập số lượng phần tử (n) của mảng (phải là số nguyên không âm).
-# 2. Nhập lần lượt n số nguyên để tạo mảng.
-# 3. Chọn thuật toán sắp xếp từ menu bằng cách nhập số từ 1 đến 5:
-#    - 1: Sắp xếp bằng Counting Sort
-#    - 2: Sắp xếp bằng Heap Sort
-#    - 3: Sắp xếp bằng Odd-Even Sort
-#    - 4: Sắp xếp bằng Pigeonhole Sort
-#    - 5: Thoát chương trình
-# 4. Sau khi chọn, chương trình sẽ hiển thị mảng đã sắp xếp.
-# 5. Có thể chọn lại thuật toán khác hoặc thoát.
-# Lưu ý: Nhập sai định dạng (ví dụ: chữ thay vì số) sẽ gây lỗi và hiển thị thông báo.
