@@ -1,3 +1,20 @@
+/*
+Program to sort an array of integers using 4 algorithms: Counting Sort, Heap Sort, Odd-Even Sort, Pigeonhole Sort.
+Usage Guide:
+
+1. Enter the number of elements (n) in the array (must be a non-negative integer).
+2. Enter n integers to create the array.
+3. Choose a sorting algorithm from the menu by entering a number from 1 to 5:
+   - 1: Sort using Counting Sort
+   - 2: Sort using Heap Sort
+   - 3: Sort using Odd-Even Sort
+   - 4: Sort using Pigeonhole Sort
+   - 5: Exit the program
+After selecting, the program will display the sorted array.
+4. You can choose another algorithm or exit.
+Note: Entering incorrect formats (e.g., letters instead of numbers) will cause errors and display a message.
+*/
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -165,19 +182,3 @@ int main() {
     return 0;
 }
 
-/*
-Program to sort an array of integers using 4 algorithms: Counting Sort, Heap Sort, Odd-Even Sort, Pigeonhole Sort.
-Usage Guide:
-
-1. Enter the number of elements (n) in the array (must be a non-negative integer).
-2. Enter n integers to create the array.
-3. Choose a sorting algorithm from the menu by entering a number from 1 to 5:
-   - 1: Sort using Counting Sort
-   - 2: Sort using Heap Sort
-   - 3: Sort using Odd-Even Sort
-   - 4: Sort using Pigeonhole Sort
-   - 5: Exit the program
-After selecting, the program will display the sorted array.
-4. You can choose another algorithm or exit.
-Note: Entering incorrect formats (e.g., letters instead of numbers) will cause errors and display a message.
-*/
